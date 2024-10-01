@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     const expenseAmount = document.getElementById("expenseAmount")
     const expenseDesc = document.getElementById("expenseDesc")
     const expenseCategory = document.getElementById("expenseCategory")
+    const expenseList = document.getElementById("expense-list")
 
     const displayIncome = document.getElementById("displayIncome")
     const balanceElement= document.getElementById("balance")
@@ -23,6 +24,13 @@ document.addEventListener("DOMContentLoaded",()=>{
         updateBalance();
     })
 
+
+    const addExpenseToList = (expense) => {
+        const listItem = document.createElement("li")
+        listItem.className = "list-group-item"
+        listItem.textContent = `${expense.description}: Rs ${expense.amount} (${expense.category})`
+        expenseList.appendChild(listItem)
+    };
     // EXpense - event Listener
 
     expenseForm.addEventListener("submit",(e)=>{
@@ -34,6 +42,7 @@ document.addEventListener("DOMContentLoaded",()=>{
             category:expenseCategory.value
 
         }
+        addExpenseToList(expense)
         expenses.push(expense)
         expenseDesc.value=""
         expenseAmount.value=""
